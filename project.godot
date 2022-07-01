@@ -1,0 +1,64 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Node",
+"class": &"BaseComponent",
+"language": &"GDScript",
+"path": "res://goodoo/base_component.gd"
+}, {
+"base": "Component",
+"class": &"BaseRootComponent",
+"language": &"GDScript",
+"path": "res://goodoo/base_root_component.gd"
+}, {
+"base": "BaseComponent",
+"class": &"BasicComponent",
+"language": &"GDScript",
+"path": "res://goodoo/basic_component.gd"
+}, {
+"base": "BaseComponent",
+"class": &"Component",
+"language": &"GDScript",
+"path": "res://goodoo/component.gd"
+}, {
+"base": "BaseRootComponent",
+"class": &"RootComponent",
+"language": &"GDScript",
+"path": "res://goodoo/root_component.gd"
+}]
+_global_script_class_icons={
+"BaseComponent": "",
+"BaseRootComponent": "",
+"BasicComponent": "",
+"Component": "",
+"RootComponent": ""
+}
+
+[application]
+
+config/name="Goodoo"
+config/features=PackedStringArray("4.0", "Vulkan Clustered")
+run/low_processor_mode=true
+
+[autoload]
+
+Goodoo="*res://goodoo/goodoo.gd"
+Goo="*res://goodoo/goo.gd"
+Utils="*res://goodoo/utils.gd"
+
+[display]
+
+window/size/viewport_width=300
+window/size/viewport_height=300
+
+[editor]
+
+script/templates_search_path="res://script_templatess"
