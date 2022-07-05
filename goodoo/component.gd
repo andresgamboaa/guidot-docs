@@ -42,7 +42,12 @@ func get_gui():
 
 # Compares the current gui of the component agains the updated gui to make the necessary changes to control nodes.
 func update_gui():
+	var time_before = Time.get_ticks_msec()
+	
 	Goodoo.diff(self.get_gui(), gui())
+	
+	var total_time = Time.get_ticks_msec() - time_before
+	print("Time taken to update "+ type + ": " + str(total_time/1000.0) +"s")
 
 
 # Lifecycle methods
@@ -72,7 +77,7 @@ func get_data():
 
 func get_control(value):
 	var _gui = get_gui()
-	if _gui.input.has("id"):
-		if _gui.input.id == value:
+	if _gui.props.has("id"):
+		if _gui.props.id == value:
 			return _gui.control
 	return _gui.get_control(value)

@@ -7,6 +7,7 @@ var presets_path
 
 func _init():
 	super("rootComponent")
+	Goo.root_control = get_parent()
 
 func _ready():
 	mount()
@@ -20,6 +21,10 @@ func mount():
 	Goodoo.render(rc, self)
 
 func update_gui():
+	var time_before = Time.get_ticks_msec()
 	var next = gui()
 	Goodoo.diff(self.get_gui(), next)
+	var total_time = Time.get_ticks_msec() - time_before
+	print("Time taken to update "+ type + ": " + str(total_time/1000.0) + "s")
 	updated()
+

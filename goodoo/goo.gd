@@ -1,5 +1,6 @@
 extends Node
 var presets:Dictionary
+var root_control
 
 func add_preset(preset_name:String,node:Control):
 	if not node.get_parent():
@@ -83,8 +84,8 @@ func initialize_presets(path):
 	
 	if path:
 		presets.merge(Utils.get_presets_from_file(path), true)
-#		print("Presets:")
-#		print(Utils.dict_to_json(presets))
+		print("Presets:")
+		print(Utils.dict_to_json(presets))
 
 
 func create_presets_from_control(node:Control):
@@ -97,6 +98,9 @@ func create_presets_from_control(node:Control):
 
 func control(properties:Dictionary={}, children=[]):
 	return BasicComponent.new(properties, "control", children)
+
+func nothing():
+	return BasicComponent.new({}, "control", [])
 
 
 # Containers
@@ -142,7 +146,7 @@ func panel_container(properties:Dictionary={}, children:Array=[]):
 func scrollbox(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"scrollbox", children)
 
-func subviewport(properties:Dictionary={}, children:Array=[]):
+func subviewportbox(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"subviewport", children)
 
 func tabbox(properties:Dictionary={}, children:Array=[]):
@@ -159,7 +163,6 @@ func link_button(properties:Dictionary={}):
 
 func texture_button(properties:Dictionary={}):
 	return BasicComponent.new(properties,"texture_button", [])
-
 
 
 func text_edit(properties:Dictionary={}):

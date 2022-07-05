@@ -94,9 +94,9 @@ func _get_props(file):
 			if split.size() == 2:
 				var prop = line.split("=")[0].dedent().split(" ")[0]
 				if prop == null: continue
-				print(prop)
 				if EXCEPTIONS.count(prop) < 1 and !prop.begins_with("theme_override_constants") and !prop.begins_with("offset"):
-					obj[current_control][prop] = null
+					if current_control:
+						obj[current_control][prop] = null
 		_index += 1
 	f.close()
 	return obj

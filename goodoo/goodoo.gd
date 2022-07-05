@@ -33,6 +33,8 @@ func change_basic_for_custom(current:BasicComponent, next:Component) -> void:
 	
 	if next_gui.type != current.type:
 		var new_control = create_control(next_gui.type, next_gui.props,is_child_of_container)
+		for child in old_control.get_children():
+			child.queue_free()
 		current.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
@@ -113,6 +115,8 @@ func diff_custom(current:Component, next:Component) -> void:
 func change_basic_for_dif_basic(current:BasicComponent, next:BasicComponent) -> void:
 	var old = current.control
 	var new = create_control(next.type, next.props, old.get_parent() is Container)
+	for child in old.get_children():
+		child.queue_free()
 	current.control.replace_by(new)
 	current.control = new
 	old.queue_free()
@@ -162,7 +166,7 @@ func change_custom_for_dif_custom(current:Component, next:Component) -> void:
 	next.get_gui().control = next_control
 	container.free()
 	current.control.free()
-	current.free()
+	current.queue_free()
 	await get_tree().process_frame
 	next.ready()
 
@@ -270,7 +274,9 @@ func create_control(type:String, properties:Dictionary,child_of_container) -> Co
 		"margin"         :node = MarginContainer.new()
 		"panel_container":node = PanelContainer.new()
 		"scrollbox"      :node = ScrollContainer.new()
-		"subviewport"    :node = SubViewportContainer.new()
+		"subviewport":
+			node = SubViewportContainer.new()
+			node.add_child(SubViewport.new())
 		"tabbox"         :node = TabContainer.new()
 		"button"         :node = Button.new()
 		"link_button"    :node = LinkButton.new()

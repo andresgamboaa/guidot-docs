@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cjimseeds5vo2"]
+[gd_scene load_steps=4 format=3 uid="uid://cjimseeds5vo2"]
 
 [ext_resource type="Script" path="res://goodoo/root_component.gd" id="1_4m48m"]
+[ext_resource type="PackedScene" uid="uid://dnp72kc25734r" path="res://goodoo/reload_components_button.tscn" id="2_2emn4"]
 
 [sub_resource type="Theme" id="Theme_6jhc0"]
 
@@ -11,5 +12,20 @@ anchor_bottom = 1.0
 hint_tooltip = "hola"
 theme = SubResource( "Theme_6jhc0" )
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0784314, 0.0980392, 0.121569, 1)
+
 [node name="RootComponent" type="Node" parent="."]
 script = ExtResource( "1_4m48m" )
+
+[node name="ReloadComponents" parent="." instance=ExtResource( "2_2emn4" )]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -28.9999
+offset_top = 7.0
+offset_right = 1.00006
+offset_bottom = 37.0
+grow_horizontal = 0
+metadata/_edit_layout_mode = 1
