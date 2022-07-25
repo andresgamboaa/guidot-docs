@@ -1,6 +1,6 @@
 extends Node
 
-# Methods to render and update the GUI.
+# Methods to render and update the view.
 
 # custom components are just called Components for simplicity
 func diff(current:BaseComponent, next:BaseComponent) -> void:
@@ -19,7 +19,7 @@ func diff(current:BaseComponent, next:BaseComponent) -> void:
 func change_basic_for_custom(current:BasicComponent, next:Component) -> void:
 	next.complete()
 	var next_control
-	var next_gui = next.get_gui()
+	var next_view = next.get_view()
 	
 	var old_control = current.control
 	next_control = old_control
@@ -31,53 +31,54 @@ func change_basic_for_custom(current:BasicComponent, next:Component) -> void:
 	
 	var is_child_of_container = current.control.get_parent() is Container
 	
-	if next_gui.type != current.type:
-		var new_control = create_control(next_gui.type, next_gui.props,is_child_of_container)
-		for child in old_control.get_children():
-			child.queue_free()
+	if next_view.type != current.type:
+		var new_control = create_control(next_view.type, next_view.props,is_child_of_container)
 		current.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
 	else:
-		set_properties(current.control, current.props, next_gui.props,is_child_of_container)
+		set_properties(current.control, current.props, next_view.props,is_child_of_container)
 	
-	for child in next.get_gui().get_children():
+	for child in next.get_view().get_children():
 		render(next_control, child)
 	
 	next.get_parent().remove_child(next)
-	next_gui.get_parent().remove_child(next_gui)
+	next_view.get_parent().remove_child(next_view)
 	
 	current.replace_by(next)
 	next.parent_control = c_parent
-	next.container.add_child(next_gui)
-	next.get_gui().control = next_control
+	next.container.add_child(next_view)
+	next.get_view().control = next_control
 	current.queue_free()
 	await get_tree().process_frame
-	next.ready()
+	next.component_ready()
 
 func change_custom_for_basic(current:Component, next:BasicComponent) -> void:
-	current.will_die()
-	for child in current.get_gui().control.get_children():
-		child.queue_free()
-		
-	var next_control = current.get_gui().control
+	current.component_will_die()
 	
-	if current.get_gui().type != next.type:
-		var old = current.get_gui().control
+	for child in current.get_view().control.get_children():
+		child.queue_free()
+	
+	var next_control = current.get_view().control
+	
+	if current.get_view().type != next.type:
+		var old = current.get_view().control
 		var child_of_container = old.get_parent() is Container
 		var new = create_control(next.type, next.props,child_of_container)
+		
 		if old is ScrollContainer:
 			old.get_h_scroll_bar().queue_free()
 			old.get_v_scroll_bar().queue_free()
-		current.get_gui().control.replace_by(new)
+		
+		current.get_view().control.replace_by(new)
 		old.queue_free()
 		next_control = new
+		
 	elif current.props.hash() != next.props.hash():
-		update_basic(current.get_gui(), next)
+		update_basic(current.get_view(), next)
 	
 	for child in next.get_children():
-		render(current.get_gui().control, child)
-	
+		render(current.get_view().control, child)
 	
 	next.get_parent().remove_child(next)
 	current.container.free()
@@ -106,7 +107,7 @@ func diff_basic(current:BasicComponent, next:BasicComponent) -> void:
 
 func diff_custom(current:Component, next:Component) -> void:
 	if current.type != next.type:
-		current.will_die()
+		current.component_will_die()
 		change_custom_for_dif_custom(current, next)
 	elif current.props.hash() != next.props.hash():
 		update_custom(current, next)
@@ -115,27 +116,30 @@ func diff_custom(current:Component, next:Component) -> void:
 func change_basic_for_dif_basic(current:BasicComponent, next:BasicComponent) -> void:
 	var old = current.control
 	var new = create_control(next.type, next.props, old.get_parent() is Container)
+	
 	for child in old.get_children():
 		child.queue_free()
+	
 	current.control.replace_by(new)
 	current.control = new
 	old.queue_free()
 	current.props = next.props
 	current.type = next.type
+	
 	for child in next.get_children():
 		next.remove_child(child)
 		add_child(child)
+	
 	next.queue_free()
 
 
 func change_custom_for_dif_custom(current:Component, next:Component) -> void:
 	next.complete()
 	var next_control
+	var current_view = current.get_view()
+	var next_view = next.get_view()
 	
-	var current_gui = current.get_gui()
-	var next_gui = next.get_gui()
-	
-	var old_control = current_gui.control
+	var old_control = current_view.control
 	next_control = old_control
 	
 	for child in old_control.get_children():
@@ -143,32 +147,32 @@ func change_custom_for_dif_custom(current:Component, next:Component) -> void:
 	
 	var child_of_container = old_control.get_parent() is Container
 	
-	if next_gui.type != current_gui.type:
-		var new_control = create_control(next_gui.type, next_gui.props,child_of_container)
-		current_gui.control.replace_by(new_control)
+	if next_view.type != current_view.type:
+		var new_control = create_control(next_view.type, next_view.props,child_of_container)
+		current_view.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
 	else:
-		set_properties(current_gui.control, current_gui.props, next_gui.props,child_of_container)
+		set_properties(current_view.control, current_view.props, next_view.props,child_of_container)
 	
-	for child in next.get_gui().get_children():
+	for child in next.get_view().get_children():
 		render(next_control, child)
 	
 	var c_parent = current.parent_control
 	var container = current.container
 	
 	next.get_parent().remove_child(next)
-	next_gui.get_parent().remove_child(next_gui)
+	next_view.get_parent().remove_child(next_view)
 	
 	current.replace_by(next)
 	next.parent_control = c_parent
-	next.container.add_child(next_gui)
-	next.get_gui().control = next_control
-	container.free()
-	current.control.free()
+	next.container.add_child(next_view)
+	next.get_view().control = next_control
+	container.queue_free()
+	current.control.queue_free()
 	current.queue_free()
 	await get_tree().process_frame
-	next.ready()
+	next.component_ready()
 
 
 func update_basic(current:BasicComponent, next:BasicComponent) -> void:
@@ -180,18 +184,19 @@ func update_basic(current:BasicComponent, next:BasicComponent) -> void:
 		update_list(current, next)
 
 
+# Naive solution. A better implementation is needed.
 func update_list(current:BasicComponent, next:BasicComponent) -> void:
 	var aux = {}
 	var current_children = current.get_children()
 	var next_children = next.get_children()
 	
-	# Remove the items (control nodes) and save them in aux
+	# Remove the items (control nodes) and save the components in aux
 	for i in range(0, current_children.size()):
 		var current_ch = current_children[i]
 		if current_ch is BasicComponent:
 			current.control.remove_child(current_ch.control)
 		else:
-			current.control.remove_child(current_ch.get_gui().control)
+			current.control.remove_child(current_ch.get_view().control)
 		current.remove_child(current_ch)
 		aux[current_ch.key] = current_ch
 	
@@ -207,7 +212,7 @@ func update_list(current:BasicComponent, next:BasicComponent) -> void:
 			if current_ch is BasicComponent:
 				current.control.add_child(current_ch.control)
 			else:
-				current.control.add_child(current_ch.get_gui().control)
+				current.control.add_child(current_ch.get_view().control)
 			aux.erase(next_ch.key)
 		else:
 			# Add a new item
@@ -226,8 +231,8 @@ func update_list(current:BasicComponent, next:BasicComponent) -> void:
 		if aux[key] is BasicComponent:
 			aux[key].control.queue_free()
 		else:
-			aux[key].will_die()
-			aux[key].get_gui().control.queue_free()
+			aux[key].component_will_die()
+			aux[key].get_view().control.queue_free()
 		aux[key].queue_free()
 
 
@@ -235,10 +240,10 @@ func update_custom(current:Component, next:Component) -> void:
 	current.props = next.props
 	next.state = current.state
 	next.complete()
-	diff(current.get_gui(), next.get_gui())
+	diff(current.get_view(), next.get_view())
 	next.queue_free()
 	await get_tree().process_frame
-	current.updated()
+	current.component_updated()
 
 # Renders the component to the scene
 func render(parent:Control, component:BaseComponent) -> void:
@@ -250,9 +255,9 @@ func render(parent:Control, component:BaseComponent) -> void:
 	else:
 		component.complete()
 		component.parent_control = parent
-		render(parent, component.get_gui())
+		render(parent, component.get_view())
 		await get_tree().process_frame
-		component.ready()
+		component.component_ready()
 
 
 func create_control(type:String, properties:Dictionary,child_of_container) -> Control:
@@ -274,7 +279,7 @@ func create_control(type:String, properties:Dictionary,child_of_container) -> Co
 		"margin"         :node = MarginContainer.new()
 		"panel_container":node = PanelContainer.new()
 		"scrollbox"      :node = ScrollContainer.new()
-		"subviewport":
+		"subviewport"    :
 			node = SubViewportContainer.new()
 			node.add_child(SubViewport.new())
 		"tabbox"         :node = TabContainer.new()
@@ -317,14 +322,14 @@ func set_properties(node:Control, last_properties, properties:Dictionary,child_o
 		if key == "preset":
 			if last_properties.has("preset"):
 				if last_properties["preset"] == properties["preset"]:
-					return
+					continue
 			var presets = properties.preset.split(" ")
 			var last_p = []
 			if last_properties.has("preset"):
 				last_p = last_properties.preset.split(" ")
 			for preset in presets:
 				if last_p.count(preset) > 0: continue
-				if Goo.get_preset(preset):
+				if Gui.get_preset(preset):
 					set_preset(node,preset,child_of_container)
 		
 		elif last_properties.has(key) and last_properties[key] == properties[key]:
@@ -359,6 +364,6 @@ func set_property(node:Control, properties:Dictionary, key:String, child_of_cont
 
 
 func set_preset(node:Control, preset:String,child_of_container) -> void:
-	var preset_props = Goo.get_preset(preset)
+	var preset_props = Gui.get_preset(preset)
 	for key in preset_props.keys():
 		set_property(node, preset_props, key,child_of_container)

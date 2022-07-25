@@ -5,7 +5,7 @@ class_name Code
 func _init(_input):
 	super("code", _input)
 
-func ready():
+func component_ready():
 	var code:CodeEdit = get_control("code")
 	code.syntax_highlighter = code.syntax_highlighter.duplicate()
 	if props.gdscript == true:
@@ -17,16 +17,16 @@ func ready():
 		]
 		for keyword in gds_keywords:
 			code.syntax_highlighter.add_keyword_color(keyword, Color("#e56578"))
-		code.syntax_highlighter.add_keyword_color("Goo", Color("#c072ff"))
+		code.syntax_highlighter.add_keyword_color("Gui", Color("#c072ff"))
 	else:
 		code.syntax_highlighter = null
 
-func gui():
+func view():
 	var height = (props.text.count("\n")+1)*29
 	return\
-	Goo.control({preset="expand-h", minimum_size=Vector2(0,height)},[
-		Goo.code_edit({preset="code", text=props.text, id="code"}),
-		Goo.button({preset="top-right",text="copy", 
+	Gui.control({preset="expand-h", minimum_size=Vector2(0,height)},[
+		Gui.code_edit({preset="code", text=props.text, id="code"}),
+		Gui.button({preset="top-right",text="copy", 
 			on_pressed=func():DisplayServer.clipboard_set(props.text)
 		})
 	])

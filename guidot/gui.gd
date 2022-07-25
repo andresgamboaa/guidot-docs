@@ -1,6 +1,5 @@
 extends Node
 var presets:Dictionary
-var root_control
 
 func add_preset(preset_name:String,node:Control):
 	if not node.get_parent():
@@ -16,30 +15,30 @@ func get_preset(preset_name:String):
 func initialize_presets(path):
 	presets = {}
 	presets["top-left"] = { 
-		anchors_preset = 0,
+		anchors_preset = 0
 	}
 	presets["top-right"] = { 
 		anchors_preset = 1,
 	}
 	presets["bottom-right"] = { 
-		anchors_preset = 2,
-	}
-	presets["bottom-left"] = { 
 		anchors_preset = 3,
 	}
-	presets["top-left"] = { 
+	presets["bottom-left"] = { 
+		anchors_preset = 2,
+	}
+	presets["center-left"] = { 
 		anchors_preset = 4,
 	}
-	presets["center-left"] = { 
+	presets["center-top"] = { 
 		anchors_preset = 5,
 	}
-	presets["center-top"] = { 
+	presets["center-right"] = { 
 		anchors_preset = 6,
 	}
-	presets["center-left"] = { 
+	presets["center-bottom"] = { 
 		anchors_preset = 7,
 	}
-	presets["center-bottom"] = { 
+	presets["center"] = { 
 		anchors_preset = 8,
 	}
 	presets["left-w"] = { 
@@ -96,11 +95,11 @@ func create_presets_from_control(node:Control):
 	node.queue_free()
 
 
-func control(properties:Dictionary={}, children=[]):
-	return BasicComponent.new(properties, "control", children)
-
 func nothing():
 	return BasicComponent.new({}, "control", [])
+
+func control(properties:Dictionary={}, children=[]):
+	return BasicComponent.new(properties, "control", children)
 
 
 # Containers
@@ -146,7 +145,7 @@ func panel_container(properties:Dictionary={}, children:Array=[]):
 func scrollbox(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"scrollbox", children)
 
-func subviewportbox(properties:Dictionary={}, children:Array=[]):
+func subviewport(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"subviewport", children)
 
 func tabbox(properties:Dictionary={}, children:Array=[]):
@@ -163,6 +162,7 @@ func link_button(properties:Dictionary={}):
 
 func texture_button(properties:Dictionary={}):
 	return BasicComponent.new(properties,"texture_button", [])
+
 
 
 func text_edit(properties:Dictionary={}):

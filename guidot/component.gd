@@ -7,7 +7,7 @@ var state:Dictionary = {}:
 		var call_update_gui = state != {}
 		state = value
 		if call_update_gui:
-			update_gui()
+			update_view()
 
 var container
 var parent_control
@@ -26,38 +26,36 @@ func _init(_type:String, _props:Dictionary={}):
 # __________________
 # Completes the tree of the component.
 func complete():
-	container.add_child(gui())
+	container.add_child(view())
 
 # The representation of the Graphical User Interface (the view composed of control nodes) of the component.
 # Similar to render function in React.
 # It generates a tree structure (similar to the Virtual Dom in React) that will be use to render 
 # the component the first time and to generate updated versions that can be used to update what has been changed.
 
-func gui(): # -> BasicComponent:
+func view(): # -> BasicComponent:
 	pass
 
-func get_gui():
+func get_view() -> BasicComponent:
 	return container.get_children()[0]
 
 
 # Compares the current gui of the component agains the updated gui to make the necessary changes to control nodes.
-func update_gui():
+func update_view() -> void:
 	var time_before = Time.get_ticks_msec()
-	
-	Goodoo.diff(self.get_gui(), gui())
-	
+	Guidot.diff(self.get_view(), view())
 	var total_time = Time.get_ticks_msec() - time_before
-	print("Time taken to update "+ type + ": " + str(total_time/1000.0) +"s")
+	print("Time taken to update "+ type + ": " + str(total_time) +"ms")
 
 
 # Lifecycle methods
-func ready():
+func component_ready():
 	pass
 
-func updated():
+func component_updated():
 	pass
 
-func will_die():
+func component_will_die():
 	pass
 
 
@@ -70,13 +68,13 @@ func get_data():
 		"control": control,
 		"container": container,
 		"parent_control": parent_control,
-		"children": get_gui().get_data(),
+		"children": get_view().get_data(),
 	}
 	return data
 
 
-func get_control(value):
-	var _gui = get_gui()
+func get_control(value) -> Control:
+	var _gui = get_view()
 	if _gui.props.has("id"):
 		if _gui.props.id == value:
 			return _gui.control

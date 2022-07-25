@@ -37,15 +37,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l8fla"]
 _data = {
-"New": SubResource( "Animation_iwksi" ),
-"RESET": SubResource( "Animation_bok1p" )
+"New": SubResource("Animation_iwksi"),
+"RESET": SubResource("Animation_bok1p")
 }
 
 [node name="Node3D" type="Node3D"]
-script = ExtResource( "1_ak5eq" )
+script = ExtResource("1_ak5eq")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource( "PrismMesh_mlncf" )
+mesh = SubResource("PrismMesh_mlncf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.180279, 0.983616, 0, -0.983616, 0.180279, -1.53735, 2.10439, 0)
@@ -57,5 +57,5 @@ transform = Transform3D(1, 0, 0, 0, 0.997582, -0.0694953, 0, 0.0694953, 0.997582
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource( "AnimationLibrary_l8fla" )
+"": SubResource("AnimationLibrary_l8fla")
 }

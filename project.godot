@@ -12,17 +12,17 @@ _global_script_classes=[{
 "base": "Node",
 "class": &"BaseComponent",
 "language": &"GDScript",
-"path": "res://goodoo/base_component.gd"
+"path": "res://guidot/base_component.gd"
 }, {
 "base": "Component",
 "class": &"BaseRootComponent",
 "language": &"GDScript",
-"path": "res://goodoo/base_root_component.gd"
+"path": "res://guidot/base_root_component.gd"
 }, {
 "base": "BaseComponent",
 "class": &"BasicComponent",
 "language": &"GDScript",
-"path": "res://goodoo/basic_component.gd"
+"path": "res://guidot/basic_component.gd"
 }, {
 "base": "Component",
 "class": &"BasicComponentPage",
@@ -37,7 +37,7 @@ _global_script_classes=[{
 "base": "BaseComponent",
 "class": &"Component",
 "language": &"GDScript",
-"path": "res://goodoo/component.gd"
+"path": "res://guidot/component.gd"
 }, {
 "base": "Component",
 "class": &"Concepts",
@@ -64,15 +64,20 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://components/pages/introduction.gd"
 }, {
+"base": "Component",
+"class": &"ListsPage",
+"language": &"GDScript",
+"path": "res://components/pages/lists.gd"
+}, {
+"base": "Component",
+"class": &"PropsPage",
+"language": &"GDScript",
+"path": "res://components/pages/props.gd"
+}, {
 "base": "BaseRootComponent",
 "class": &"RootComponent",
 "language": &"GDScript",
-"path": "res://goodoo/root_component.gd"
-}, {
-"base": "Component",
-"class": &"SceneViewer",
-"language": &"GDScript",
-"path": "res://goodoo/components/scene_viewer.gd"
+"path": "res://guidot/root_component.gd"
 }, {
 "base": "Component",
 "class": &"SideBar",
@@ -95,14 +100,19 @@ _global_script_classes=[{
 "path": "res://components/pages/state.gd"
 }, {
 "base": "Component",
+"class": &"ToDoApp",
+"language": &"GDScript",
+"path": "res://components/todoapp.gd"
+}, {
+"base": "Component",
+"class": &"TodoItem",
+"language": &"GDScript",
+"path": "res://components/todoitem.gd"
+}, {
+"base": "Component",
 "class": &"TopBar",
 "language": &"GDScript",
 "path": "res://components/topbar.gd"
-}, {
-"base": "Component",
-"class": &"Treed",
-"language": &"GDScript",
-"path": "res://components/pages/3d.gd"
 }]
 _global_script_class_icons={
 "BaseComponent": "",
@@ -116,28 +126,30 @@ _global_script_class_icons={
 "CustomComponentPage": "",
 "Installation": "",
 "Introduction": "",
+"ListsPage": "",
+"PropsPage": "",
 "RootComponent": "",
-"SceneViewer": "",
 "SideBar": "",
 "Signals": "",
 "SimpleCounter": "",
 "State": "",
-"TopBar": "",
-"Treed": ""
+"ToDoApp": "",
+"TodoItem": "",
+"TopBar": ""
 }
 
 [application]
 
-config/name="Goodoo"
+config/name="Guidot-Docs"
 run/main_scene="res://root.tscn"
 config/features=PackedStringArray("4.0", "Vulkan Clustered")
 run/low_processor_mode=true
 
 [autoload]
 
-Goodoo="*res://goodoo/goodoo.gd"
-Goo="*res://goodoo/goo.gd"
-Utils="*res://goodoo/utils.gd"
+Gui="*res://guidot/gui.gd"
+Utils="*res://guidot/utils.gd"
+Guidot="*res://guidot/guidot.gd"
 
 [display]
 

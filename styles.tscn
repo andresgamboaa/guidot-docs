@@ -1,7 +1,7 @@
 [gd_scene load_steps=42 format=3 uid="uid://cfba71ubvycl5"]
 
 [ext_resource type="FontData" uid="uid://dubyq8xosm8yk" path="res://fonts/Quicksand-Bold.ttf" id="1_nhslt"]
-[ext_resource type="Font" uid="uid://ceiqpl8fvl1ba" path="res://fonts/font.tres" id="2_02e50"]
+[ext_resource type="Font" uid="uid://bipa22ljlb6o0" path="res://fonts/font.tres" id="2_02e50"]
 [ext_resource type="FontData" uid="uid://dx4w00ljupoea" path="res://fonts/Quicksand-SemiBold.ttf" id="3_7458m"]
 [ext_resource type="FontData" uid="uid://cx81ml1n6eitg" path="res://fonts/JetBrains_Mono/static/JetBrainsMono-Regular.ttf" id="4_8v6q7"]
 [ext_resource type="Texture2D" uid="uid://5ex710kd30bh" path="res://assets/menu_icon.png" id="5_fdgrm"]
@@ -478,9 +478,11 @@ offset_bottom = 619.0
 offset_right = 600.0
 offset_bottom = 28.0
 icon = ExtResource( "5_fdgrm" )
+flat = true
 
 [node name="icon-close-menu" type="Button" parent="_groups/_icons"]
 offset_top = 32.0
 offset_right = 600.0
 offset_bottom = 60.0
 icon = ExtResource( "6_ghb4t" )
+flat = true

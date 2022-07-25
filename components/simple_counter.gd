@@ -8,11 +8,11 @@ func _init():
 func increment():
 	state.count = state.count+1
 
-func gui():
+func view():
 	return\
-	Goo.control({preset="expand"},[
-		Goo.color_rect({preset="full",color=Color("#202531")}),
-		Goo.center({preset="full"},[
-			Goo.button({text=str(state.count),on_pressed=increment})
+	Gui.control({preset="expand"},[
+		Gui.color_rect({preset="full",color=Color("#202531")}),
+		Gui.center({preset="full"},[
+			Gui.button({text=str(state.count),on_pressed=increment})
 		])
 	])

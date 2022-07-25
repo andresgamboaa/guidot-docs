@@ -26,17 +26,18 @@ func _init():
 	}
 
 
-func toggleSideBar():
+func toggleSideBar() -> void:
+	print("toggle")
 	state.sideBarVisible = not state.sideBarVisible
 
 
-func handle_option_pressed(_name):
+func handle_option_pressed(_name) -> void:
 	state.options.filter(func(item): return item.current )[0].current = false
 	state.options.filter(func(item): return item.name==_name)[0].current = true
-	update_gui()
+	update_view()
 
 
-func current_page():
+func current_page() -> BaseComponent:
 	var current_option = state.options.filter(func(item): return item.current )[0]
 	match current_option.name:
 		"Introduction": return Introduction.new({on_option_pressed=handle_option_pressed})
@@ -46,20 +47,21 @@ func current_page():
 		"Custom Components": return CustomComponentPage.new()
 		"State": return State.new()
 		"Signals": return Signals.new()
-		_:              return Goo.nothing()
+		"Props": return PropsPage.new()
+		"Lists": return ListsPage.new()
+		_:         return Gui.nothing()
 
 
-func gui():
+func view() -> BasicComponent:
 	return\
-	Goo.hbox({preset="full"},[
+	Gui.hbox({preset="full"},[
 		SideBar.new({
 			visible=state.sideBarVisible, 
 			options=state.options,
 			on_option_pressed=handle_option_pressed
 		}),
-		Goo.vbox({preset="expand"},[
+		Gui.vbox({preset="expand"},[
 			TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
 			current_page()
 		])
 	])
-

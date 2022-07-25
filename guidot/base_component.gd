@@ -26,7 +26,7 @@ func _init():
 func get_data():
 	pass
 
-func ready():
+func component_ready():
 	pass
 
 func get_control(_value):
