@@ -26,7 +26,7 @@ func handle_meta_clicked(meta) -> void:
 
 func view() -> BasicComponent:
 	return\
-	Gui.scrollbox({"preset":"scroll-cc-exp","id":"scroll"},[
+	Gui.smoothScrollbox({"preset":"scroll-cc-exp","id":"scroll"},[
 		Gui.margin({"preset":"margin-cc-exp-h", "minimum_size":Vector2(400,0)},[
 			Gui.vbox({"preset":"vbox-cc-exp-h"},[
 				Gui.rich_label({"preset":"animated-title","text":"[center][wave]Guidot[/wave][/center]"}),

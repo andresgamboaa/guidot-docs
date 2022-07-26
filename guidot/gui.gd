@@ -145,6 +145,10 @@ func panel_container(properties:Dictionary={}, children:Array=[]):
 func scrollbox(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"scrollbox", children)
 
+func smoothScrollbox(properties:Dictionary={}, children:Array=[]):
+	return BasicComponent.new(properties,"smoothscrollbox", children)
+
+
 func subviewport(properties:Dictionary={}, children:Array=[]):
 	return BasicComponent.new(properties,"subviewport", children)
 

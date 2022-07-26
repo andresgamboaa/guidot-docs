@@ -12,9 +12,7 @@ func component_ready():
 	tween.tween_property(scroll, "modulate:a", 1.0, 0.3).from(0.0).set_trans(Tween.TRANS_CUBIC)
 	tween.tween_property(scroll, "position:y", scroll.position.y, 0.3).from(scroll.position.y+20.0).set_trans(Tween.TRANS_CUBIC)
 
-func handle_meta_clicked(meta):
-	print(meta)
-	props.on_option_pressed.call(meta)
+func handle_meta_clicked(meta): props.on_option_pressed.call(meta)
 
 func view():
 	return\

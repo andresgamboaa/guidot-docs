@@ -42,6 +42,9 @@ func change_basic_for_custom(current:BasicComponent, next:Component) -> void:
 	for child in next.get_view().get_children():
 		render(next_control, child)
 	
+	if next_control is SmoothScrollContainer:
+		next_control.ready()
+	
 	next.get_parent().remove_child(next)
 	next_view.get_parent().remove_child(next_view)
 	
@@ -147,8 +150,9 @@ func change_custom_for_dif_custom(current:Component, next:Component) -> void:
 	
 	var child_of_container = old_control.get_parent() is Container
 	
+	var new_control
 	if next_view.type != current_view.type:
-		var new_control = create_control(next_view.type, next_view.props,child_of_container)
+		new_control = create_control(next_view.type, next_view.props,child_of_container)
 		current_view.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
@@ -157,6 +161,8 @@ func change_custom_for_dif_custom(current:Component, next:Component) -> void:
 	
 	for child in next.get_view().get_children():
 		render(next_control, child)
+	if new_control is SmoothScrollContainer:
+		new_control.ready()
 	
 	var c_parent = current.parent_control
 	var container = current.container
@@ -252,6 +258,8 @@ func render(parent:Control, component:BaseComponent) -> void:
 		parent.add_child(component.control)
 		for child in component.get_children():
 			render(component.control, child)
+		if component.control is SmoothScrollContainer:
+			component.control.ready()
 	else:
 		component.complete()
 		component.parent_control = parent
@@ -279,6 +287,7 @@ func create_control(type:String, properties:Dictionary,child_of_container) -> Co
 		"margin"         :node = MarginContainer.new()
 		"panel_container":node = PanelContainer.new()
 		"scrollbox"      :node = ScrollContainer.new()
+		"smoothscrollbox":node = SmoothScrollContainer.new()
 		"subviewport"    :
 			node = SubViewportContainer.new()
 			node.add_child(SubViewport.new())
