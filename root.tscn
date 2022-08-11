@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3www803j8q4i"]
+
+[ext_resource type="Script" path="res://guidot/root_component.gd" id="1_4m48m"]
+[ext_resource type="FontFile" uid="uid://be6arjsnp4kyx" path="res://fonts/Quicksand-Regular.ttf" id="1_lujey"]
+[ext_resource type="PackedScene" uid="uid://bg0ebiy2lyo0j" path="res://guidot/reload_components_button.tscn" id="3_qvyfv"]
+
+[sub_resource type="Theme" id="Theme_6jhc0"]
+default_font = ExtResource("1_lujey")
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+hint_tooltip = "hola"
+theme = SubResource("Theme_6jhc0")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.0784314, 0.0980392, 0.121569, 1)
+
+[node name="RootComponent" type="Node" parent="."]
+script = ExtResource("1_4m48m")
+
+[node name="ReloadComponents" parent="." instance=ExtResource("3_qvyfv")]
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -30.0
+offset_right = 0.0
+offset_bottom = 30.0

@@ -1,0 +1,206 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+_global_script_classes=[{
+"base": "Component",
+"class": &"AddNodes",
+"language": &"GDScript",
+"path": "res://components/pages/add_nodes.gd"
+}, {
+"base": "Component",
+"class": &"AnimatedButton",
+"language": &"GDScript",
+"path": "res://components/simple_animation.gd"
+}, {
+"base": "Component",
+"class": &"Animations",
+"language": &"GDScript",
+"path": "res://components/pages/animations.gd"
+}, {
+"base": "Node",
+"class": &"BaseComponent",
+"language": &"GDScript",
+"path": "res://guidot/base_component.gd"
+}, {
+"base": "Component",
+"class": &"BaseRootComponent",
+"language": &"GDScript",
+"path": "res://guidot/base_root_component.gd"
+}, {
+"base": "BaseComponent",
+"class": &"BasicComponent",
+"language": &"GDScript",
+"path": "res://guidot/basic_component.gd"
+}, {
+"base": "Component",
+"class": &"BasicComponentPage",
+"language": &"GDScript",
+"path": "res://components/pages/basic_component.gd"
+}, {
+"base": "Component",
+"class": &"Code",
+"language": &"GDScript",
+"path": "res://components/code.gd"
+}, {
+"base": "BaseComponent",
+"class": &"Component",
+"language": &"GDScript",
+"path": "res://guidot/component.gd"
+}, {
+"base": "Component",
+"class": &"Concepts",
+"language": &"GDScript",
+"path": "res://components/pages/concepts.gd"
+}, {
+"base": "Component",
+"class": &"Conditional",
+"language": &"GDScript",
+"path": "res://components/conditional_example.gd"
+}, {
+"base": "Component",
+"class": &"ConditionalRendering",
+"language": &"GDScript",
+"path": "res://components/pages/conditional_rendering.gd"
+}, {
+"base": "Component",
+"class": &"ControlPage",
+"language": &"GDScript",
+"path": "res://components/pages/get_control_page.gd"
+}, {
+"base": "Component",
+"class": &"Counter",
+"language": &"GDScript",
+"path": "res://components/counter.gd"
+}, {
+"base": "Component",
+"class": &"CustomComponentPage",
+"language": &"GDScript",
+"path": "res://components/pages/custom_components_page.gd"
+}, {
+"base": "Component",
+"class": &"Installation",
+"language": &"GDScript",
+"path": "res://components/pages/installation.gd"
+}, {
+"base": "Component",
+"class": &"Introduction",
+"language": &"GDScript",
+"path": "res://components/pages/introduction.gd"
+}, {
+"base": "Component",
+"class": &"Lifecycle",
+"language": &"GDScript",
+"path": "res://components/pages/lifecycle_methods.gd"
+}, {
+"base": "Component",
+"class": &"ListsPage",
+"language": &"GDScript",
+"path": "res://components/pages/lists.gd"
+}, {
+"base": "Component",
+"class": &"PresetsPage",
+"language": &"GDScript",
+"path": "res://components/pages/presets_page.gd"
+}, {
+"base": "Component",
+"class": &"PropsPage",
+"language": &"GDScript",
+"path": "res://components/pages/props.gd"
+}, {
+"base": "BaseRootComponent",
+"class": &"RootComponent",
+"language": &"GDScript",
+"path": "res://guidot/root_component.gd"
+}, {
+"base": "Component",
+"class": &"SideBar",
+"language": &"GDScript",
+"path": "res://components/sidebar.gd"
+}, {
+"base": "Component",
+"class": &"Signals",
+"language": &"GDScript",
+"path": "res://components/pages/signals.gd"
+}, {
+"base": "Component",
+"class": &"SimpleCounter",
+"language": &"GDScript",
+"path": "res://components/simple_counter.gd"
+}, {
+"base": "ScrollContainer",
+"class": &"SmoothScrollContainer",
+"language": &"GDScript",
+"path": "res://guidot/new_script.gd"
+}, {
+"base": "Component",
+"class": &"State",
+"language": &"GDScript",
+"path": "res://components/pages/state.gd"
+}, {
+"base": "Component",
+"class": &"ToDoApp",
+"language": &"GDScript",
+"path": "res://components/todoapp.gd"
+}, {
+"base": "Component",
+"class": &"TodoItem",
+"language": &"GDScript",
+"path": "res://components/todoitem.gd"
+}, {
+"base": "Component",
+"class": &"TopBar",
+"language": &"GDScript",
+"path": "res://components/topbar.gd"
+}]
+_global_script_class_icons={
+"AddNodes": "",
+"AnimatedButton": "",
+"Animations": "",
+"BaseComponent": "",
+"BaseRootComponent": "",
+"BasicComponent": "",
+"BasicComponentPage": "",
+"Code": "",
+"Component": "",
+"Concepts": "",
+"Conditional": "",
+"ConditionalRendering": "",
+"ControlPage": "",
+"Counter": "",
+"CustomComponentPage": "",
+"Installation": "",
+"Introduction": "",
+"Lifecycle": "",
+"ListsPage": "",
+"PresetsPage": "",
+"PropsPage": "",
+"RootComponent": "",
+"SideBar": "",
+"Signals": "",
+"SimpleCounter": "",
+"SmoothScrollContainer": "",
+"State": "",
+"ToDoApp": "",
+"TodoItem": "",
+"TopBar": ""
+}
+
+[application]
+
+config/name="Docs"
+run/main_scene="res://root.tscn"
+config/features=PackedStringArray("4.0", "Vulkan Clustered")
+config/icon="res://icon.png"
+
+[autoload]
+
+Utils="*res://guidot/utils.gd"
+Gui="*res://guidot/gui.gd"
+Guidot="*res://guidot/guidot.gd"
