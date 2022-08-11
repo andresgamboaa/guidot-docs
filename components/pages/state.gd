@@ -17,7 +17,7 @@ func handle_meta_clicked(meta):
 
 func view():
 	return\
-	Gui.scrollbox({preset="scroll-cc-exp",id="scroll"},[
+	Gui.smoothScrollbox({preset="scroll-cc-exp",id="scroll"},[
 		Gui.margin({preset="margin-cc-exp-h", minimum_size=Vector2(0,0)},[
 			Gui.vbox({preset="vbox-cc-exp-h"},[
 				Gui.label({preset="title", text="State"}),
@@ -30,6 +30,9 @@ func view():
 				Gui.margin({minimum_size=Vector2(0,20)}),
 				Gui.label({preset="paragraph", text="Now you can use it in the view method."}),
 				Code.new({gdscript=true,text='func view():\n\treturn\\\n\tGui.label({text="My favorite game engine is " + state.name})'}),
+				Gui.margin({minimum_size=Vector2(0,20)}),
+				Gui.label({preset="paragraph", text="*There is currently an issue causing the state dictionary setter not to execute update_view(), while a solution is found, update_view() must be called every time the state is changed."}),
+				Code.new({gdscript=true,text='func change():\n\tstate.name = "Godot 4"\n\tupdate_view()'}),
 				Gui.margin({minimum_size=Vector2(0,20)}),
 				Gui.rich_label({preset="rich-paragraph", text='Next: [url=Signals]Signals[/url]', on_meta_clicked=handle_meta_clicked}),
 			]),

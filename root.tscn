@@ -22,6 +22,7 @@ color = Color(0.0784314, 0.0980392, 0.121569, 1)
 script = ExtResource("1_4m48m")
 
 [node name="ReloadComponents" parent="." instance=ExtResource("3_qvyfv")]
+visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -30.0

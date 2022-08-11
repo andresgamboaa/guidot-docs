@@ -36,7 +36,7 @@ func view() -> BasicComponent:
 				Gui.margin({minimum_size=Vector2(0,20)}),
 				Gui.hbox({preset="expand-h"},[
 					Gui.hbox({preset="expand-h", size_flags_stretch_ratio=2},[
-						Code.new({gdscript=true, text='func _init():\n\tsuper("counter")\n\tstate = {count=0}\n\nfunc increment():\n\tstate.count += 1\n\nfunc view():\n\treturn\\\n\tGui.center({preset="full"}, [\n\t\tGui.button({\n\t\t\ttext=str(state.count)\n\t\t\ton_pressed=increment\n\t\t})\n\t])'}),						
+						Code.new({gdscript=true, text='func _init():\n\tsuper("counter")\n\tstate = {count=0}\n\nfunc increment():\n\tstate.count += 1\n\tupdate_view()\n\nfunc view():\n\treturn\\\n\tGui.center({preset="full"}, [\n\t\tGui.button({\n\t\t\ttext=str(state.count)\n\t\t\ton_pressed=increment\n\t\t})\n\t])'}),						
 					]),
 					SimpleCounter.new()
 				]),

@@ -59,6 +59,9 @@ func view():
 				Gui.margin({custom_minimum_size=Vector2(0,20)}),
 				Code.new({gdscript=true, text='"top-left": anchors_preset = 0\n"top-right":anchors_preset = 1\n"bottom-right": anchors_preset = 3\n"bottom-left": anchors_preset = 2\n"center-left": anchors_preset = 4\n"center-top": anchors_preset = 5\n"center-right": anchors_preset = 6\n"center-bottom": anchors_preset = 7\n"center": anchors_preset = 8\n"left-w": anchors_preset = 9\n"top-w": anchors_preset = 10\n"right-w": anchors_preset = 11\n"bottom-w": anchors_preset = 12\n"v-center-w": anchors_preset = 13\n"h-center-w":anchors_preset = 14\n"full":anchors_preset = 15\n\nchild of containers\n"expand-h": {\n\tsize_flags_horizontal = 3,\n\tsize_flags_vertical = 0,\n}\n"expand-v": {\n\tsize_flags_horizontal = 3,\n\tsize_flags_vertical = 0,\n}\n"expand": {\n\tsize_flags_horizontal = 3,\n\tsize_flags_vertical = 3,\n}\n\n"clip_contents": {\n\tclip_contents = true\n}\n'}),
 				Gui.margin({custom_minimum_size=Vector2(0,20)}),
+				Gui.label({preset="paragraph", text="You still have the option set properties with code:"}),
+				Code.new({gdscript=true, text='Gui.margin({custom_minimum_size=Vector2(0,20)})'}),
+				Gui.margin({custom_minimum_size=Vector2(0,20)}),
 				Gui.rich_label({preset="rich-paragraph", text='Next: [url=Lists]Lists[/url]', on_meta_clicked=handle_meta_clicked}),
 			]),
 		])
