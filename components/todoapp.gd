@@ -18,7 +18,7 @@ func component_ready():
 func add_todo(text):
 	last_id += 1
 	state.todos.push_front({id=last_id, todo=text})
-#	line_edit.text = ""
+	line_edit.text = ""
 	update_view()
 
 func delete_todo(id):
@@ -48,11 +48,11 @@ func view():
 						}))
 					),
 				]),
-#				Gui.line_edit({
-#					id="userInput", 
-#					text="", 
-#					on_text_submitted=add_todo
-#				})
+				Gui.line_edit({
+					id="userInput", 
+					text="", 
+					on_text_submitted=add_todo
+				})
 			])
 		])
 	])
