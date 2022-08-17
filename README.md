@@ -1,5 +1,5 @@
 # Guidot Docs
-[Guidot](https://github.com/AndresGamboaA/guidot) is a GDScript library for building user interfaces with Godot Engine 4.
+[Guidot] (Now called Goduz) (https://github.com/AndresGamboaA/guidot) is a GDScript library for building user interfaces with Godot Engine 4.
 This application was built using Guidot and contains information about how to use it.
 
 ![Alt text](screenshots/gif1.gif?raw=true "Title")
